@@ -1,0 +1,213 @@
+<html>
+    <style type="text/css">
+        .title{
+            color:rgb(35,83,125);
+            font-family: 'Times New Roman', Times, serif;
+            margin-right: 10px;
+            font-size: 25px;
+        }
+        .publish{
+            margin-right: 10px;
+            font-style: oblique;
+            font-size: 15px;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        .author{
+            margin-right: 15px;
+            margin-bottom: 5px;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 20px;
+        }
+        .bib{
+            color: blue;
+        }
+        pre{
+            background-color: gainsboro;
+            padding: 10px;
+        }
+        .titleArea{
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
+    </style>
+<body>
+<script script type="text/javascript">
+function show()
+{
+    var reader = new FileReader();
+    var a = document.createElement('pre')
+    reader.onload = function() 
+    {
+        a.innerHTML = this.result
+        c = splitFile(this.result)
+        var b = document.getElementById("appendView")
+        for (let index = 0; index < c.length; index++) {
+            // console.log(c[index]['author'])
+            console.log(c[index])
+            d = createBibDom(c[index], index)
+            b.appendChild(d)
+        }
+    }
+    var f = document.getElementById("filePicker").files[0];
+    reader.readAsText(f);
+    var bibtex = "@article{DBLP:journals/access/AshrafKHP20,\n	author    = {Imran Ashraf and Mingyu Kang and Soojung Hur and Yongwan Park},\n	 title     = {MINLOC: Magnetic Field Patterns-Based Indoor Localization Using Convolutional Neural Networks},\n	 journal   = {IEEE Access},\n	 volume    = {8},\n	 pages     = {66213--66227},\n	 year      = {2020},\n	 url       = {https://doi.org/10.1109/ACCESS.2020.2985384},\n	 doi       = {10.1109/ACCESS.2020.2985384},\n	 timestamp = {Fri, 22 May 2020 21:54:48 +0200},\n	 biburl    = {https://dblp.org/rec/journals/access/AshrafKHP20.bib},\n	 bibsource = {dblp computer science bibliography, https://dblp.org}}";
+    // getTag(bibtex)
+}
+
+function splitFile(bibFile){
+    var bibtex = bibFile.split('@')
+    var b = []
+    for (let index = 0; index < bibtex.length; index++) {
+        if(bibtex[index] != ""){
+            b.push(getTag('@'+bibtex[index]));
+        }
+    }
+    // console.log(b)
+    return b
+}
+
+function getTag(bibtex){
+    biborigin = bibtex
+    bibtex = bibtex.replace(/[\r\n\t]/g,"")
+    for (let index = 0; index < 200; index++) {
+        bibtex = bibtex.replace("  ", " ")
+    }
+    bibtex = bibtex.split(',')
+    b = bibtex[1]
+    for (let index = 2; index < bibtex.length; index++) {
+        b  = b + "," + bibtex[index];
+    }
+    templeteBibtex = bibtex[0]
+    bibtex = []
+    bibtex.push(templeteBibtex)
+    bibtex.push(b)
+
+
+    // console.log(typeof(newBibtex[0]))
+    bibtex_1 = bibtex[1].split(' = ')
+    bibtex_2 = []
+    bibtex_1.forEach(bib => {
+        bib = bib.replace(/\s+$/,'')
+        bib = bib.replace(/^\s+/,'')
+        bib = bib.split('},', -1)
+        // console.log(bib)
+        bib.forEach(b => {
+            b = b.replace(/{/g,"")
+            b = b.replace(/}/g,"")
+            b = b.replace(/\s+$/,'')
+            b = b.replace(/^\s+/,'')
+            // console.log(b)
+            bibtex_2.push(b)
+        });
+    });
+    // console.log(bibtex_2)
+    bibTag = {}
+    for (let index = 0; index < bibtex_2.length; index = index +2) {
+        bibTag[bibtex_2[index]] = bibtex_2[index+1];
+    }
+    // console.log(bibTag)
+    bibTag['biborigin'] = biborigin
+    return bibTag
+}
+
+function createBibDom(bibObject, id){
+    var bibDom = document.createElement('div')
+
+    var titDom = document.createElement('div')
+    var authorDom = document.createElement('div')
+    var publishDom = document.createElement('div')
+    var biboriginDom = document.createElement('div')
+    titDom.className = 'titleArea'
+    biboriginDom.className = 'bibArea'
+
+    bibDom.appendChild(titDom)
+    bibDom.appendChild(authorDom)
+    bibDom.appendChild(publishDom)
+    bibDom.appendChild(biboriginDom)
+
+    if(bibObject['title'] != null){
+        var title = document.createElement('span')
+        title.className = 'title'
+        title.innerHTML = bibObject['title']
+        titDom.appendChild(title)
+    }
+    if(bibObject['url'] != null){
+        var u = document.createElement('a')
+        u.innerHTML = '[source link]'
+        u.setAttribute('href',bibObject['url'])
+        titDom.appendChild(u)
+    }
+    if(bibObject['author'] != null){
+        var author = document.createElement('span')
+        var btnBib = document.createElement('a')
+        author.className = 'author'
+        btnBib.className = 'bib'
+        author.innerHTML = bibObject['author']
+        btnBib.innerHTML = '[bib]'
+        btnBib.addEventListener('click',function(){
+            var bibArea = document.getElementsByTagName('pre')[id]
+            if(bibArea.style.display == 'none'){
+                bibArea.style.display = 'block'
+            }else{
+                bibArea.style.display = 'none'
+            }
+        })
+
+        authorDom.appendChild(author)
+        authorDom.appendChild(btnBib)
+    }
+    if(bibObject['journal'] != null){
+        var journal = document.createElement('span')
+        journal.className = 'publish'
+        journal.innerHTML = 'journal: ' + bibObject['journal']
+        publishDom.appendChild(journal)
+    }
+    if(bibObject['volume'] != null){
+        var volume = document.createElement('span')
+        volume.className = 'publish'
+        volume.innerHTML = 'volume: '+ bibObject['volume']
+        publishDom.appendChild(volume)
+    }
+    if(bibObject['no'] != null){
+        var no = document.createElement('no')
+        no.className = 'publish'
+        no.innerHTML = 'no: ' + bibObject['no']
+        publishDom.appendChild(no)
+    }
+    if(bibObject['booktitle'] != null){
+        var booktitle = document.createElement('span')
+        booktitle.className = 'publish'
+        booktitle.innerHTML = "booktitle: " + bibObject['booktitle']
+        publishDom.appendChild(booktitle)
+    }
+    if(bibObject['pages'] != null){
+        var pages = document.createElement('span')
+        pages.className = 'publish'
+        pages.innerHTML = 'pages :' + bibObject['pages']
+        publishDom.appendChild(pages)
+    }
+    if(bibObject['year'] != null){
+        var year = document.createElement('span')
+        year.className = 'publish'
+        year.innerHTML = 'year: ' + bibObject['year']
+        publishDom.appendChild(year)
+    }
+    if(bibObject['biborigin'] != null){
+        var bib = document.createElement('pre')
+        bib.className = 'bib' + id
+        bib.innerHTML = bibObject['biborigin']
+        bib.style.display = 'none'
+        biboriginDom.appendChild(bib)
+    }
+
+    return bibDom
+}
+
+</script>
+<input type="file" name="file" id="filePicker"/>
+<div id = "div1">
+</div>
+<input type="button" value = "显示"  onclick="show()"/>
+<div id="appendView" style="padding-left: 20px;"></div>
+</body>
+</html>

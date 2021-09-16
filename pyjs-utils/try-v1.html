@@ -1,0 +1,166 @@
+<html>
+<body>
+
+<input type="file" name="file" id="filePicker"/>
+<div id = "div1">
+</div>
+<input type="button" value = "显示"  onclick="show()"/>
+<div id="appendView"></div>
+<script src="latex.js"></script>
+<script script type="text/javascript">
+function show()
+{
+    var reader = new FileReader();
+    var a = document.createElement('pre')
+    reader.onload = function() 
+    {
+        a.innerHTML = this.result
+        // c = splitFile(this.result)
+        // for (let index = 0; index < c.length; index++) {
+        //     console.log(c[index]['author'])
+        //     console.log(c[index])
+        // }
+        var b = document.getElementById("appendView")
+        b.appendChild(a)
+    }
+    var f = document.getElementById("filePicker").files[0];
+    reader.readAsText(f);
+    var bibtex = "@article{DBLP:journals/access/AshrafKHP20,\n	author    = {Imran {Ashraf} {\textgreater} {\%}and Mingyu Kang and Soojung Hur and Yongwan Park},\n	 title     = {MINLOC: Magnetic Field Patterns-Based Indoor Localization Using Convolutional Neural Networks},\n	 journal   = {IEEE Access},\n	 volume    = {8},\n	 pages     = {66213--66227},\n	 year      = {2020},\n	 url       = {https://doi.org/10.1109/ACCESS.2020.2985384},\n	 doi       = {10.1109/ACCESS.2020.2985384},\n	 timestamp = {Fri, 22 May 2020 21:54:48 +0200},\n	 biburl    = {https://dblp.org/rec/journals/access/AshrafKHP20.bib},\n	 bibsource = {dblp computer science bibliography, https://dblp.org}}";
+    getTag(bibtex)
+}
+
+regExps = [];
+regExps.push(new RegExp("\{\\\\\\W*\\w+\}")); // 1 {\[]}
+regExps.push(new RegExp("\\\\\\W*\{\\w+\}")); // 2 \[]{\[]}
+regExps.push(new RegExp("\\\\\\W*\\w+\\s")); // 3 \[]
+regExps.push(new RegExp("\\\\\\W*\\w+")); // 4 \[]
+regExps.push(new RegExp("\\\\(?![:\\\\\])\\W{1}")); // 5
+
+function fixValue (value) {
+    do {
+        var removeBrackets = value.match(/^\{(.*?)\}$/g, '$1');
+        if (removeBrackets) {
+            value = value.replace(/^\{(.*?)\}$/g, '$1');
+        }
+    } while (removeBrackets);
+    console.log(value)
+    // Working on a more efficient way of processing the latex
+    var index = value.indexOf("\\");
+    console.log(index)
+    var latex_to_unicode = latexUnicode();
+    // console.log(typeof(latex_to_unicode))
+    if (index > -1) {
+        for (var exp in regExps) {
+            do {
+                var str = value.match(regExps[exp]);
+                console.log(str)
+                var key = (str) ? str[0] : "";
+                if (str) {
+                    if (typeof(latex_to_unicode[key]) != "undefined") {
+                        value = value.replace(key, latex_to_unicode[key]);
+                    } else {
+                        var newkey = key.replace(new RegExp("(\\w)"), '{$1}')
+                        if (typeof(latex_to_unicode[newkey]) != "undefined") {
+                            value = value.replace(key, latex_to_unicode[newkey]);
+                        } else {
+                            str = "";
+                        }
+                    }
+                } else {
+                    str = "";
+                }
+            } while (str.length);
+        }
+    }
+    value = value.replace(/[\{|\}]/g, '');
+    return value;
+}
+
+function splitFile(bibFile){
+    var bibtex = bibFile.split('@')
+    var b = []
+    // console.log(bibtex)
+    // var bibOrigin = {}
+    // var num = 0;
+    for (let index = 0; index < bibtex.length; index++) {
+        if(bibtex[index] != ""){
+            // bibOrigin["biborigin"] = '@'+bibtex[index]
+            b.push(getTag('@'+bibtex[index]));
+            // bibOrigin = {}
+        }
+    }
+    // console.log(b)
+    return b
+}
+
+function getTag(bibtex){
+    bibtex = bibtex.replace(/[\r\n]/g,"")
+    bibtex = bibtex.slice(0,bibtex.length-2)
+    // bibtex = bibtex.split('}',-1)[0]
+
+    // bibtex = re.sub('[\r\n\t]', '', bibtex)
+    for (let index = 0; index < 200; index++) {
+        bibtex = bibtex.replace("  ", " ")
+    }
+    bibtex = bibtex.split(',')
+    b = bibtex[1]
+    for (let index = 2; index < bibtex.length; index++) {
+        b  = b + "," + bibtex[index];
+    }
+    templeteBibtex = bibtex[0]
+    bibtex = []
+    bibtex.push(templeteBibtex)
+    bibtex.push(b)
+    // console.log(bibtex)
+    
+    //first_row = bibtex[0]+","
+    // dblp_id = bibtex[0].split(':')[1]
+
+    // console.log(bibtex)
+    // console.log(dblp_id)
+    // newBibtex = []
+    // for (let index = 0; index < bibtex.length-1; index++) {
+    //     newBibtex.push(bibtex[index+1]);
+    //     // console.log(bibtex[index])
+    // }// delete 0
+
+
+    // console.log(typeof(newBibtex[0]))
+    bibtex_1 = bibtex[1].split(' = ')
+    bibtex_2 = []
+    bibtex_1.forEach(bib => {
+        bib = bib.replace(/\s+$/,'')
+        bib = bib.replace(/^\s+/,'')
+        // templeteB = bib.split('}')
+        // var s = ""
+        // for (let index = 0; index < templeteB.length-1; index++) {
+        //     s += templeteB[index]
+        // }
+        // b = bib.split("}")[templeteB.length-1]
+        // bib = []
+        // bib.push(b)
+        // bib.push(s)
+        bib = bib.split('},', -1)
+        // console.log(bib)
+        bib.forEach(b => {
+            b = b.replace(/{/,"")
+            // b = b.replace(/}/g,"")
+            b = b.replace(/\s+$/,'')
+            b = b.replace(/^\s+/,'')
+            // console.log(fixValue(b))
+            // b = b.replace(/(^/s*)|(/s*$)/g, "")
+            bibtex_2.push(fixValue(b))
+        });
+    });
+    // console.log(bibtex_2)
+    bibTag = {}
+    for (let index = 0; index < bibtex_2.length; index = index +2) {
+        bibTag[bibtex_2[index]] = bibtex_2[index+1];
+    }
+    // console.log(bibTag)
+    return bibTag
+}
+
+</script>
+</body>
+</html>

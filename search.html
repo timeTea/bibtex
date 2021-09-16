@@ -1,0 +1,6 @@
+<form name="search" id="search" class="mt-3">
+    <p>Author: <input type="text" ng-model="author"></input> Title: <input type="text" ng-model="title"></input> Keywords: <input type="text" ng-model="keywords"></input></p>
+    <p>Years: <input type="text" ng-model="yearStart" style="width: 10%;"></input>  ——  <input type="text" ng-model="yearEnd" style="width: 10%;"></input>
+    Users: <input type="text" ng-model="users"></input> Rating: <input type="text" ng-model="rating"></input></p>
+    <p>style choice:    <input style="width: 3.5%; height: 70%;" ng-model="styleAuthor"> Author <input style="width: 3.5%; height: 70%;" ng-model="styleYear"> Year <input style="width: 3.5%; height: 70%;" ng-model="styleRating"> Rating <button class="btn btn-secondary" ng-click="searchBib()">搜索</button></p>
+</form>

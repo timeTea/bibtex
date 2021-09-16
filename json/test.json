@@ -1,0 +1,17 @@
+[{
+    "id":1,
+    "biborigin":"@article{DBLP:journals/access/BaiWM20,/n        author    = {Na Bai and/n                     Zhixiao Wang and/n                     Fanrong Meng},/n        title     = {A Stochastic Attention {CNN} Model for Rumor Stance Classification},/n        journal   = {{IEEE} Access},/n        volume    = {8},/n        pages     = {80771--80778},/n        year      = {2020},/n        url       = {https://doi.org/10.1109/ACCESS.2020.2990770},/n        doi       = {10.1109/ACCESS.2020.2990770},/n        timestamp = {Tue, 16 Jun 2020 17:14:49 +0200},/n        biburl    = {https://dblp.org/rec/journals/access/BaiWM20.bib},/n        bibsource = {dblp computer science bibliography, https://dblp.org}/n      }",
+    "title":"BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+    "author":"Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova",
+    "localUrl":"http://114.215.172.152/students/ZhoushengYe/papers-old/papers/DevlinCLT19.pdf",
+    "source":"Association for Computational Linguistics, In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, NAACL-HLT 2019, Minneapolis, MN, USA, June 2-7, 2019, Volume 1 (Long and Short Papers)",
+    "year":"2019"
+},{
+    "id":1,
+    "biborigin":"@article{DBLP:journals/ijabim/JiYY20,/n        author    = {Peinan Ji and/n                     Xiangbin Yan and/n                     Guang Yu},/n        title     = {Can Rumor Clarification Eliminate the Effects of Rumors?: Evidence/n                     From China},/n        journal   = {Int. J. Asian Bus. Inf. Manag.},/n        volume    = {11},/n        number    = {1},/n        pages     = {48--62},/n        year      = {2020},/n        url       = {https://doi.org/10.4018/IJABIM.2020010103},/n        doi       = {10.4018/IJABIM.2020010103},/n        timestamp = {Wed, 20 May 2020 21:25:50 +0200},/n        biburl    = {https://dblp.org/rec/journals/ijabim/JiYY20.bib},/n        bibsource = {dblp computer science bibliography, https://dblp.org}/n      }",
+    "title":"BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+    "author":"Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova",
+    "localUrl":"http://114.215.172.152/students/ZhoushengYe/papers-old/papers/DevlinCLT19.pdf",
+    "source":"Association for Computational Linguistics, In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, NAACL-HLT 2019, Minneapolis, MN, USA, June 2-7, 2019, Volume 1 (Long and Short Papers)",
+    "year":"2019"
+}]

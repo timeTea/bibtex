@@ -1,0 +1,13 @@
+<div ng-repeat="(id,item) in items">
+    <p class="h3"><input type="checkbox" class="selectItem" name="ids" selectNum="{{id}}">  <a href="{{item.biburl}}">{{item.title}}</a>     <button ng-click="edit(item.id)" id="{{item.id}}" class="btn btn-secondary">修改</button></p>
+    <p class="font-weight-bold">{{item.author}}</p>
+    <p class="font-weight-light">{{item.source}}</p>
+    <div>
+        <a onclick="showBib(this)" class="text-decoration-none text-info" id="{{item.id}}">  [bib]</a>
+        <pre class="text-muted bg-light p-3" style="display: none;">{{item.biborigin}}</pre>
+    </div>
+</div>
+<p>
+    <button onclick="downloadBib()" class="btn btn-secondary" style="float: right;">保存</button>
+    <button id="view" ng-click="back()" class="btn btn-secondary" style="float: right;">返回</button>
+</p>

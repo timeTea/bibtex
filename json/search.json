@@ -1,0 +1,27 @@
+{
+    "author":"jimmy",
+    "title":"attention is all your nead",
+    "keyWords":["lstm","rumor"],
+    "yearStart":"2010",
+    "yearEnd":"2011",
+    "users":["ye","hu","wang"],  
+    "rating": 12,
+    "style":{
+        "1":"author",
+        "2":"year",
+        "3":"rating"
+    }
+}
+
+{
+    "author":"jimmy",
+    "title":"attention is all your nead",
+    "keyWords":["lstm","rumor"],
+    "yearStart":"2010",
+    "yearEnd":"2011",
+    "users":["ye","hu","wang"],  
+    "rating": 12,
+    "1":"author",
+    "2":"year",
+    "3":"rating"
+}

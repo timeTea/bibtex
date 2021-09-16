@@ -1,0 +1,29 @@
+{"data":[{
+    "id":2,
+    "biborigin":"@inproceedings{DevlinCLT19,\n        author    = {Jacob Devlin and\n                     Ming{-}Wei Chang and\n                     Kenton Lee and\n                     Kristina Toutanova},\n        editor    = {Jill Burstein and\n                     Christy Doran and\n                     Thamar Solorio},\n        title     = {{BERT:} Pre-training of Deep Bidirectional Transformers for Language\n                     Understanding},\n        booktitle = {Proceedings of the 2019 Conference of the North American Chapter of\n                     the Association for Computational Linguistics: Human Language Technologies,\n                     {NAACL-HLT} 2019, Minneapolis, MN, USA, June 2-7, 2019, Volume 1 (Long\n                     and Short Papers)},\n        pages     = {4171--4186},\n        publisher = {Association for Computational Linguistics},\n        year      = {2019},\n        url       = {https://doi.org/10.18653/v1/n19-1423},\n        doi       = {10.18653/v1/n19-1423},\n        timestamp = {Tue, 28 Jan 2020 10:30:29 +0100},\n        biburl    = {https://dblp.org/rec/conf/naacl/DevlinCLT19.bib},\n        bibsource = {dblp computer science bibliography, https://dblp.org}\n      }",
+    "title":"BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+    "author":"Jacob Devlin, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova",
+    "localUrl":"http://114.215.172.152/students/ZhoushengYe/papers-old/papers/DevlinCLT19.pdf",
+    "source":"Association for Computational Linguistics, In Proceedings of the 2019 Conference of the North American Chapter of the Association for Computational Linguistics: Human Language Technologies, NAACL-HLT 2019, Minneapolis, MN, USA, June 2-7, 2019, Volume 1 (Long and Short Papers)",
+    "year":"2019",
+    "keyWords":["bert","self-attention"],
+    "modelAlgo":["bert","attention"],
+    "memo":"i like it",
+    "rating":98,
+    "users":["ye"]
+},{
+  "id":5,
+  "biborigin":"  @book{DBLP:books/sp/Braga-Neto20,\n    author    = {Ulisses M. Braga{-}Neto},\n    title     = {Fundamentals of Pattern Recognition and Machine Learning},\n    publisher = {Springer},\n    year      = {2020},\n    url       = {https://doi.org/10.1007/978-3-030-27656-0},\n    doi       = {10.1007/978-3-030-27656-0},\n    isbn      = {978-3-030-27655-3},\n    timestamp = {Mon, 21 Sep 2020 13:26:58 +0200},\n    biburl    = {https://dblp.org/rec/books/sp/Braga-Neto20.bib},\n    bibsource = {dblp computer science bibliography, https://dblp.org}\n  }\n",
+  "title":"Fundamentals of Pattern Recognition and Machine Learning",
+  "author":"Ulisses M. Braga{-}Neto",
+  "localUrl":"http://114.215.172.152/students/ZhoushengYe/papers-old/papers/DevlinCLT19.pdf",
+  "source":"Springer",
+  "year":"2020",
+  "keyWords":["cnn","attention"],
+  "modelAlgo":["cnn","network"],
+  "memo":"i like it",
+  "rating":98,
+  "users":["ye"]
+}]}
+
+
